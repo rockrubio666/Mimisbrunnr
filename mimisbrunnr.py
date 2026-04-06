@@ -280,8 +280,24 @@ def second_scan(ai_report, target, report_dir, verbose, tools_dict):
 				if verbose:
 					preview = '\n'.join(result.stdout.split('\n')[:5])
 					print(preview + "\n[...] Output truncated. See log file")
+				
+				clean_output = []
+				for line in result.stdout.splitlines():
+					line_lower = line.lower()
 					
-				log_file.write(result.stdout)
+					# 1. Ignorar ruido visual de las herramientas
+					if "progress" in line_lower or "time:" in line_lower or "speed:" in line_lower or "estimated" in line_lower:
+						continue
+						
+					# 2. Si es una herramienta de fuerza bruta web, guardar solo hallazgos exitosos
+					if "gobuster" in cmd or "dirb" in cmd:
+						if "status: 200" in line_lower or "status: 301" in line_lower or "status: 302" in line_lower:
+							clean_output.append(line)
+					else:
+						clean_output.append(line)
+						
+				log_file.write('\n'.join(clean_output))
+				
 				if result.stderr:
 					log_file.write("\n[ERRORS/WARNINGS]:\n" + result.stderr)
 					
@@ -309,6 +325,12 @@ def final_analysis_report(model_choices, target, nmap_data, phase3_log, report_d
 	try:
 		with open(phase3_log, 'r') as f:
 			phase3_data = f.read()
+			
+			max_chars = 15000
+			if len(phase3_data) > max_chars:
+				print(f"{Colors.YELLOW}[!] El log de la Fase 3 es masivo. Truncando datos para proteger la cuota de la IA...{Colors.RESET}")
+				phase3_data = phase3_data[:max_chars] + "\n\n...[OUTPUT TRUNCADO PARA EVITAR LÍMITE DE TOKENS]..."
+				
 	except Exception as e:
 		phase3_data = f"Could not read Phase 3 results: {e}"
 		
