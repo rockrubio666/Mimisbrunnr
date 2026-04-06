@@ -16,17 +16,18 @@ Mímisbrunnr 👁️ - AI-Augmented Offensive Framework (AOCF)Plaintext
 🌊 The Well of Wisdom Mímisbrunnr is an advanced offensive cybersecurity framework designed to automate reconnaissance and attack vector modeling through Artificial Intelligence.  Inspired by the Norse myth of the well guarded by the wise Mimir, this tool processes raw technical data into high-level actionable intelligence.
 
 Unlike traditional scanners, Mímisbrunnr utilizes a hybrid architecture:
-	- Analytical Intelligence: Leverages Large Language Models (LLMs) to identify creative and complex attack paths. 
+
+	* Analytical Intelligence: Leverages Large Language Models (LLMs) to identify creative and complex attack paths. 
 	
-	- Deterministic Precision: Ensures critical tools (defined in tools.yaml) are executed regardless of AI suggestions to maintain security baselines.
+	* Deterministic Precision: Ensures critical tools (defined in tools.yaml) are executed regardless of AI suggestions to maintain security baselines.
 	
 	
 🛠️ Core Features: The 5-Phase Workflow
-	- 1 Reconnaissance. Deep port and service fingerprinting using Nmap (-sV, -sC, -O).
-	- 2 Analytical Insight. Raw data processing via Gemini, ChatGPT, or Claude to identify security gaps.
-	- 3 Tactical Execution. Automated execution of secondary tools (Nuclei, Gobuster, Nikto, Hydra) based on AI suggestions and tools.yaml.
-	- 4 Intelligence Correlation. Cross-referencing initial scan data with tactical tool logs to confirm vulnerabilities.
-	- 5 Attack Modeling. Generation of a final, step-by-step attack vector report in professional Markdown. 
+	* 1 Reconnaissance. Deep port and service fingerprinting using Nmap (-sV, -sC, -O).
+	* 2 Analytical Insight. Raw data processing via Gemini, ChatGPT, or Claude to identify security gaps.
+	* 3 Tactical Execution. Automated execution of secondary tools (Nuclei, Gobuster, Nikto, Hydra) based on AI suggestions and tools.yaml.
+	* 4 Intelligence Correlation. Cross-referencing initial scan data with tactical tool logs to confirm vulnerabilities.
+	* 5 Attack Modeling. Generation of a final, step-by-step attack vector report in professional Markdown. 
 	
 	
 🚀 Installation & Setup
@@ -60,7 +61,8 @@ Define the mandatory tools and specific command syntaxes that the framework must
     command: "nikto -h http://<TARGET_IP>"
 
 
-📋 Command Line Arguments
+📋 Command Line Arguments.
+
 	-t, --target: Specify a single target (IP, Domain, or CIDR).
 	-f, --file: Load a list of multiple targets from a text file.
 	-m, --model: Select the AI engine: gemini, chatgpt, or claude.
