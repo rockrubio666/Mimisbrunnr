@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# --- CONFIGURACIÓN DE COLORES (Estilo Mímisbrunnr) ---
+# --- COLOR CONFIGURATION (Mímisbrunnr Style) ---
 CYAN='\033[96m'
 GREEN='\033[92m'
 YELLOW='\033[93m'
@@ -10,48 +10,48 @@ RESET='\033[0m'
 
 echo -e "${CYAN}${BOLD}########################################################"
 echo -e "#                                                      #"
-echo -e "#     MÍMISBRUNNR: AUTOMATED INSTALLER v2.0            #"
+echo -e "#      MÍMISBRUNNR: AUTOMATED INSTALLER v2.0           #"
 echo -e "#                                                      #"
 echo -e "########################################################${RESET}"
 
-# 1. Verificación de privilegios
+# 1. Privilege Verification
 if [ "$EUID" -ne 0 ]; then 
-  echo -e "${RED}[-] Por favor, ejecuta el script con sudo.${RESET}"
+  echo -e "${RED}[-] Please run the script with sudo.${RESET}"
   exit 1
 fi
 
-# 2. Actualización del sistema
-echo -e "\n${CYAN}[*] Fase 1: Actualizando repositorios y sistema...${RESET}"
+# 2. System Update
+echo -e "\n${CYAN}[*] Phase 1: Updating repositories and system...${RESET}"
 apt update && apt upgrade -y
 
-# 3. Instalación de dependencias de Python y desarrollo
-echo -e "\n${CYAN}[*] Fase 2: Instalando dependencias de Python (dev, pip, venv)...${RESET}"
+# 3. Python and Development Dependencies Installation
+echo -e "\n${CYAN}[*] Phase 2: Installing Python dependencies (dev, pip, venv)...${RESET}"
 apt install -y python3-pip python3-venv python3-dev build-essential libssl-dev libffi-dev
 
-# 4. Instalación de herramientas ofensivas (Requeridas por Mímisbrunnr)
-echo -e "\n${CYAN}[*] Fase 3: Instalando herramientas de seguridad del ecosistema...${RESET}"
-# Se instalan las herramientas que el script invoca mediante subprocess 
+# 4. Offensive Tool Installation (Required by Mímisbrunnr)
+echo -e "\n${CYAN}[*] Phase 3: Installing security ecosystem tools...${RESET}"
+# Installing tools invoked by the script via subprocess 
 apt install -y nmap nikto gobuster nuclei dirb hydra exploitdb dnsutils
 
-# 5. Configuración del Entorno Virtual (VENV)
-echo -e "\n${CYAN}[*] Fase 4: Creando entorno virtual de Python...${RESET}"
+# 5. Virtual Environment Configuration (VENV)
+echo -e "\n${CYAN}[*] Phase 4: Creating Python virtual environment...${RESET}"
 if [ -d ".venv" ]; then
-    echo -e "${YELLOW}[!] El entorno virtual ya existe. Reinstalando dependencias...${RESET}"
+    echo -e "${YELLOW}[!] Virtual environment already exists. Reinstalling dependencies...${RESET}"
 else
     python3 -m venv .venv
-    echo -e "${GREEN}[+] Entorno virtual '.venv' creado con éxito.${RESET}"
+    echo -e "${GREEN}[+] Virtual environment '.venv' successfully created.${RESET}"
 fi
 
-# 6. Instalación de bibliotecas de Python dentro del entorno
-echo -e "\n${CYAN}[*] Fase 5: Instalando bibliotecas necesarias (IA & YAML)...${RESET}"
-# Se activan e instalan las librerías detectadas en el código fuente 
+# 6. Python Library Installation inside the environment
+echo -e "\n${CYAN}[*] Phase 5: Installing necessary libraries (AI & YAML)...${RESET}"
+# Activating and installing libraries detected in the source code 
 source .venv/bin/activate
 pip install --upgrade pip
 pip install google-genai openai anthropic pyyaml
 
-# 7. Verificación de archivo de configuración
+# 7. Configuration File Verification
 if [ ! -f "config.yaml" ]; then
-    echo -e "\n${YELLOW}[!] Creando archivo tools.yaml de ejemplo...${RESET}"
+    echo -e "\n${YELLOW}[!] Creating sample tools.yaml file...${RESET}"
     cat <<EOF > tools.yaml
 tools:
   - name: "nikto"
@@ -66,8 +66,8 @@ EOF
 fi
 
 echo -e "\n${GREEN}${BOLD}########################################################"
-echo -e "#   INSTALACIÓN COMPLETADA EXITOSAMENTE                #"
+echo -e "#    INSTALLATION COMPLETED SUCCESSFULLY               #"
 echo -e "########################################################${RESET}"
-echo -e "${YELLOW}Para ejecutar Mímisbrunnr, usa los siguientes comandos:${RESET}"
+echo -e "${YELLOW}To execute Mímisbrunnr, use the following commands:${RESET}"
 echo -e "${BOLD}1. source .venv/bin/activate"
 echo -e "2. python3 mimisbrunnr.py -t <TARGET> -m gemini -o report.md -c tools.yaml${RESET}\n"
