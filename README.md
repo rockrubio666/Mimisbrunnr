@@ -67,3 +67,6 @@ Define the mandatory tools and specific command syntaxes that the framework must
 	-c, --config: Path to the YAML configuration file (default: tools.yaml).
 	-o, --output: Filename for the phase 2 report.
 	-v, --verbose: Enable real-time detailed logging of every internal step.
+=======
+# Mimisbrunnr
+Advanced offensive cybersecurity framework designed to automate reconnaissance and attack vector modeling through Artificial Intelligence.  Inspired by the Norse myth of the well guarded by the wise Mimir, this tool processes raw technical data into high-level actionable intelligence
