@@ -14,7 +14,6 @@ Mímisbrunnr 👁️ - AI-Augmented Offensive Framework (AOCF)Plaintext
     ==============================================================================
 	
 🌊 The Well of Wisdom Mímisbrunnr is an advanced offensive cybersecurity framework designed to automate reconnaissance and attack vector modeling through Artificial Intelligence.  Inspired by the Norse myth of the well guarded by the wise Mimir, this tool processes raw technical data into high-level actionable intelligence.
-
 Unlike traditional scanners, Mímisbrunnr utilizes a hybrid architecture:
 
 	* Analytical Intelligence: Leverages Large Language Models (LLMs) to identify creative and complex attack paths. 
@@ -23,6 +22,7 @@ Unlike traditional scanners, Mímisbrunnr utilizes a hybrid architecture:
 	
 	
 🛠️ Core Features: The 5-Phase Workflow
+
 	* 1 Reconnaissance. Deep port and service fingerprinting using Nmap (-sV, -sC, -O).
 	* 2 Analytical Insight. Raw data processing via Gemini, ChatGPT, or Claude to identify security gaps.
 	* 3 Tactical Execution. Automated execution of secondary tools (Nuclei, Gobuster, Nikto, Hydra) based on AI suggestions and tools.yaml.
