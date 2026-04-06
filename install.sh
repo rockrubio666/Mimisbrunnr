@@ -59,7 +59,7 @@ tools:
   - name: "gobuster"
     command: "gobuster dir -u http://<TARGET_IP> -w /usr/share/wordlists/dirb/common.txt"
   - name: "dirb"
-    command: "dirb http://<TARGET_IP>
+    command: "dirb http://<TARGET_IP>"
   - name: "nuclei"
     command: "nuclei -u http://<TARGET_IP>"
 EOF
@@ -70,4 +70,4 @@ echo -e "#   INSTALACIÓN COMPLETADA EXITOSAMENTE                #"
 echo -e "########################################################${RESET}"
 echo -e "${YELLOW}Para ejecutar Mímisbrunnr, usa los siguientes comandos:${RESET}"
 echo -e "${BOLD}1. source .venv/bin/activate"
-echo -e "2. python3 mimisbrunnr.py -t <TARGET> -m gemini -o report.md -c config.yaml${RESET}\n"
+echo -e "2. python3 mimisbrunnr.py -t <TARGET> -m gemini -o report.md -c tools.yaml${RESET}\n"
